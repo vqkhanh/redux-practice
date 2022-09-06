@@ -1,4 +1,4 @@
-import { bugAdded } from "./action";
+import { bugAdded, bugResolved } from "./action";
 import store from "./store";
 
 const unsubscribe = store.subscribe(() => {
@@ -6,6 +6,7 @@ const unsubscribe = store.subscribe(() => {
 });
 
 store.dispatch(bugAdded("bug 1"));
+store.dispatch(bugResolved(1));
 
 // unsubscribe();
 
