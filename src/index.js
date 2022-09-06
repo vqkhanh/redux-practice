@@ -1,11 +1,12 @@
 import store from "./store";
+import { BUG_ADDED, BUG_REMOVED } from "./actionType";
 
 const unsubscribe = store.subscribe(() => {
   console.log("store change:", store.getState());
 });
 
 store.dispatch({
-  type: "bugAdded",
+  type: BUG_ADDED,
   payload: {
     description: "Bug1",
   },
@@ -14,7 +15,7 @@ store.dispatch({
 unsubscribe();
 
 store.dispatch({
-  type: "bugRem/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.htmloved",
+  type: BUG_REMOVED,
   payload: {
     id: 1,
   },
