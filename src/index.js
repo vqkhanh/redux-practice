@@ -15,10 +15,10 @@ const store = configureStore();
 //   console.log("store change:", store.getState());
 // });
 
-store.dispatch(() => {
+store.dispatch((dispatch, getState) => {
   // call API
   // When the promise is resolve => dispatch()
-  store.dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
+  dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
   // If the promise is rejected => dispatch other function
   // can not do that above with plan function
 });
