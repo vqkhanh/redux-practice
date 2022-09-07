@@ -11,11 +11,19 @@ import { userAdded } from "./store/users";
 
 const store = configureStore();
 
-const unsubscribe = store.subscribe(() => {
-  console.log("store change:", store.getState());
+// const unsubscribe = store.subscribe(() => {
+//   console.log("store change:", store.getState());
+// });
+
+store.dispatch(() => {
+  // call API
+  // When the promise is resolve => dispatch()
+  store.dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
+  // If the promise is rejected => dispatch other function
+  // can not do that above with plan function
 });
 
-store.dispatch(userAdded({ name: "user 1" }));
+// store.dispatch(userAdded({ name: "user 1" }));
 // store.dispatch(userAdded({ name: "user 2" }));
 // store.dispatch(projectAdded({ description: "project 1" }));
 // store.dispatch(bugAdded({ description: "bug 1" }));
