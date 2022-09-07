@@ -15,6 +15,7 @@ store.dispatch(bugAdded({ description: "bug 3" }));
 store.dispatch(bugResolved({ id: 1 }));
 
 const unResolveBugs = getUnresolveBugs(store.getState());
+const unResolveBugs2 = getUnresolveBugs(store.getState());
 
 // console.log(store.getState());
-console.log(unResolveBugs);
+console.log(unResolveBugs === unResolveBugs2);
