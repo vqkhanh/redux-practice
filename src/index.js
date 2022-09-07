@@ -23,6 +23,11 @@ store.dispatch((dispatch, getState) => {
   // can not do that above with plan function
 });
 
+store.dispatch({
+  type: "error",
+  payload: { message: "A error occured" },
+});
+
 // store.dispatch(userAdded({ name: "user 1" }));
 // store.dispatch(userAdded({ name: "user 2" }));
 // store.dispatch(projectAdded({ description: "project 1" }));
