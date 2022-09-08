@@ -11,22 +11,31 @@ import { userAdded } from "./store/users";
 
 const store = configureStore();
 
+store.dispatch({
+  type: "apiCallBegan", // api request
+  payload: {
+    url: "/bugs",
+    onSuccess: "bugsReceived",
+    onError: "bugsRequestFailed",
+  },
+});
+
 // const unsubscribe = store.subscribe(() => {
 //   console.log("store change:", store.getState());
 // });
 
-store.dispatch((dispatch, getState) => {
-  // call API
-  // When the promise is resolve => dispatch()
-  dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
-  // If the promise is rejected => dispatch other function
-  // can not do that above with plan function
-});
+// store.dispatch((dispatch, getState) => {
+// call API
+// When the promise is resolve => dispatch()
+// dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
+// If the promise is rejected => dispatch other function
+// can not do that above with plan function
+// });
 
-store.dispatch({
-  type: "error",
-  payload: { message: "A error occured" },
-});
+// store.dispatch({
+//   type: "error",
+//   payload: { message: "A error occured" },
+// });
 
 // store.dispatch(userAdded({ name: "user 1" }));
 // store.dispatch(userAdded({ name: "user 2" }));
