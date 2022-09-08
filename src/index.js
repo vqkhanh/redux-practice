@@ -8,7 +8,7 @@ import {
 import { projectAdded } from "./store/projects";
 import configureStore from "./store/configureStore";
 import { userAdded } from "./store/users";
-import { loadBugs, resolveBug } from "./store/bugs";
+import { loadBugs, assignBugToUser } from "./store/bugs";
 
 const store = configureStore();
 
@@ -18,7 +18,7 @@ const store = configureStore();
 store.dispatch(loadBugs());
 
 setTimeout(() => {
-  store.dispatch(resolveBug(2));
+  store.dispatch(assignBugToUser(2, 4));
 }, 2000);
 
 // const unsubscribe = store.subscribe(() => {
