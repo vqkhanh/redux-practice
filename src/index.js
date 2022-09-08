@@ -8,16 +8,12 @@ import {
 import { projectAdded } from "./store/projects";
 import configureStore from "./store/configureStore";
 import { userAdded } from "./store/users";
-import { loadBugs } from "./store/bugs";
+import { addBug } from "./store/bugs";
 
 const store = configureStore();
 
 // UI layer
-store.dispatch(loadBugs());
-
-setTimeout(() => {
-  store.dispatch(loadBugs());
-}, 2000);
+store.dispatch(addBug({ description: "khanh" }));
 
 // const unsubscribe = store.subscribe(() => {
 //   console.log("store change:", store.getState());

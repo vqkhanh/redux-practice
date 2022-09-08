@@ -4,8 +4,6 @@ import { apiCallBegan } from "./api";
 import moment from "moment";
 
 // reducer
-let lastId = 0;
-
 const slice = createSlice({
   name: "bugs",
   initialState: {
@@ -31,11 +29,7 @@ const slice = createSlice({
     },
 
     bugAdded: (bugs, action) => {
-      bugs.list.push({
-        id: ++lastId,
-        description: action.payload.description,
-        resolve: false,
-      });
+      bugs.list.push(action.payload);
     },
     bugResolved: (bugs, action) => {
       const index = bugs.list.findIndex((x) => x.id === action.payload.id);
@@ -76,6 +70,14 @@ export const loadBugs = () => (dispatch, getState) => {
     })
   );
 };
+
+export const addBug = (bug) =>
+  apiCallBegan({
+    url,
+    method: "post",
+    data: bug,
+    onSuccess: bugAdded.type,
+  });
 
 // selector
 // export const getUnresolveBugs = (state) =>
