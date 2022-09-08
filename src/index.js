@@ -8,17 +8,12 @@ import {
 import { projectAdded } from "./store/projects";
 import configureStore from "./store/configureStore";
 import { userAdded } from "./store/users";
-import * as actions from "./store/api";
+import { loadBugs } from "./store/bugs";
 
 const store = configureStore();
 
-store.dispatch(
-  actions.apiCallBegan({
-    url: "/bugs",
-    onSuccess: "bugsReceived",
-    onError: "bugsRequestFailed",
-  })
-);
+// UI layer
+store.dispatch(loadBugs());
 
 // const unsubscribe = store.subscribe(() => {
 //   console.log("store change:", store.getState());
