@@ -28,17 +28,21 @@ const slice = createSlice({
       bugs.loading = false;
     },
 
+    //DDD cqrs
+    // commamd - event
+    // addbug - bugAdded
     bugAdded: (bugs, action) => {
       bugs.list.push(action.payload);
     },
+    // resolveBug (command) - bugResolved (event)
     bugResolved: (bugs, action) => {
       const index = bugs.list.findIndex((x) => x.id === action.payload.id);
-      bugs[index].resolve = true;
+      bugs.list[index].resolved = true;
     },
     bugAssignedToUser: (bugs, action) => {
       const { bugId, userId } = action.payload;
       const index = bugs.list.findIndex((x) => x.id === bugId);
-      bugs[index].userId = userId;
+      bugs.list[index].userId = userId;
     },
   },
 });
@@ -79,16 +83,24 @@ export const addBug = (bug) =>
     onSuccess: bugAdded.type,
   });
 
+export const resolveBug = (id) =>
+  apiCallBegan({
+    url: url + "/" + id,
+    method: "patch",
+    data: { resolved: true },
+    onSuccess: bugResolved.type,
+  });
+
 // selector
 // export const getUnresolveBugs = (state) =>
-//   state.entities.bugs.list.filter((bug) => !bug.resolve);
+//   state.entities.bugs.list.filter((bug) => !bug.resolved);
 
 // memoization
 // bugs => get unresolve bugs from the cache
 export const getUnresolveBugs = createSelector(
   (state) => state.entities.bugs,
   (state) => state.entities.projects,
-  (bugs, projects) => bugs.list.filter((x) => !x.resolve)
+  (bugs, projects) => bugs.list.filter((x) => !x.resolved)
 );
 
 export const getBugsByUser = (userId) =>

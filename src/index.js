@@ -8,12 +8,18 @@ import {
 import { projectAdded } from "./store/projects";
 import configureStore from "./store/configureStore";
 import { userAdded } from "./store/users";
-import { addBug } from "./store/bugs";
+import { loadBugs, resolveBug } from "./store/bugs";
 
 const store = configureStore();
 
 // UI layer
-store.dispatch(addBug({ description: "khanh" }));
+// store.dispatch(addBug({ description: "khanh" }));
+
+store.dispatch(loadBugs());
+
+setTimeout(() => {
+  store.dispatch(resolveBug(2));
+}, 2000);
 
 // const unsubscribe = store.subscribe(() => {
 //   console.log("store change:", store.getState());
@@ -21,7 +27,7 @@ store.dispatch(addBug({ description: "khanh" }));
 
 // store.dispatch((dispatch, getState) => {
 // call API
-// When the promise is resolve => dispatch()
+// When the promise is resolved => dispatch()
 // dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
 // If the promise is rejected => dispatch other function
 // can not do that above with plan function

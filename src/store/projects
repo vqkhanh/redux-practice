@@ -12,7 +12,7 @@ const slice = createSlice({
       projects.push({
         id: ++lastId,
         description: action.payload.description,
-        resolve: false,
+        resolved: false,
       });
     },
   },
